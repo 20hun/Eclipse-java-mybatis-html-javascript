@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="student1.dao.Student1Mapper">
+
+<insert id="insertStudent1" parameterType="student1">
+insert into student1(
+	id
+	,name
+	,kor
+	,eng
+	,mat
+	,gps_x
+	) values (
+	student1_seq.nextval
+	,#{name}
+	,#{kor}
+	,#{eng}
+	,#{mat}
+	,#{gps_x}
+)
+
+</insert>
+
+<select id="printAllStudent1" resultType="student1">
+select
+	id
+	,name
+	,kor
+	,eng
+	,mat
+	,to_char(indate, 'YYYY/MM/DD HH:MI:SS') as indate
+	,gps_x
+from
+	student1
+order by
+	id desc
+
+</select>
+
+<delete id="deleteStudent1" parameterType="int">
+delete
+from
+	student1
+where
+	id = #{id}
+
+</delete>
+
+<update id="updateStudent1" parameterType="student1">
+update student1
+	set
+	name = #{name}
+	,kor = #{kor}
+	,eng = #{eng}
+	,mat = #{mat}
+	,gps_x = #{gps_x}
+where
+	id = #{id}
+</update>
+
+<select id="searchStudent1" parameterType="string" resultType="student1">
+select
+	id
+	,name
+	,kor
+	,eng
+	,mat
+	,to_char(indate, 'YYYY/MM/DD HH:MI:SS') as indate
+	,gps_x
+from
+	student1
+where
+	upper(name) like '%'|| upper(#{name}) ||'%'
+order by
+	id desc
+</select>
+
+</mapper>
